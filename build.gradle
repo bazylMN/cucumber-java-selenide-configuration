@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+}
+
+group 'cucumber-java-selenide-configuration'
+version '1.0-SNAPSHOT'
+
+task upgradeGradle(type: Wrapper) {
+    gradleVersion = '5.0'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-bin.zip"
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testCompile group: 'io.cucumber', name: 'cucumber-java8', version: '4.2.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '4.2.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '4.2.0'
+
+    testCompile group: 'com.codeborne', name: 'selenide', version: '5.1.0'
+
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    testCompile group: 'log4j', name: 'log4j', version: '1.2.17'
+}
+
+task deleteCucumberReports(type: Delete) {
+    dependsOn(clean)
+
+    delete 'out', 'target'
+}
+
+/**
+ * to run Cucumber tests with custom runTests task and with chosen browser, type:
+ * '-Dselenide.browser=chrome runTests'
+ * '-Dselenide.browser=firefox runTests'
+ * '-Dselenide.browser=ie runTests'
+ *
+ * to run Cucumber tests with headless mode, type:
+ * '-Dselenide.browser=chrome -Dselenide.headless=true runTests'
+ * 
+ * to run Cucumber tests with chosen browser, type:
+ * 'clean -Dselenide.browser=chrome test'
+ * 'clean -Dselenide.browser=firefox test'
+ * 'clean -Dselenide.browser=ie test'
+ */
+task runTests (type: Test){
+    dependsOn(clean)
+    dependsOn(deleteCucumberReports)
+    systemProperty "selenide.browser", System.getProperty("selenide.browser")
+    systemProperty "selenide.headless", System.getProperty("selenide.headless")
+}
