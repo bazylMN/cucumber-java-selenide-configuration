@@ -2,11 +2,10 @@ package cucumber.glue.steps;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java8.En;
 import cucumber.glue.pageObjects.NavigationPageObjects;
 import org.junit.Assert;
 
-public class NavigationPageSteps implements En {
+public class NavigationPageSteps {
 
     private NavigationPageObjects navigationPageObjects;
 
@@ -14,13 +13,13 @@ public class NavigationPageSteps implements En {
         this.navigationPageObjects = navigationPageObjects;
     }
 
-    @Given("I go to {string} page")
+    @Given("I go to (.*?) page")
     public void iGoToPage(String urlName){
         navigationPageObjects.getPage(urlName);
    }
 
-    @Then("I should be on {string} page")
-    public void iShouldBeOnPage(CharSequence name){
+    @Then("I should be on (.*?) page")
+    public void iShouldBeOnPage(String name){
         String currentUrl = navigationPageObjects.getUrl();
         Assert.assertTrue(currentUrl.contains(name));
     }

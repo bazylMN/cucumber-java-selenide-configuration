@@ -1,5 +1,5 @@
 # Cucumber-java-selenide-configuration template
-#### with Cucumber-java, Selenide library and Selenide Configuration to run browser:
+#### with Cucumber-java, Selenide library and Selenide Configuration to run browsers:
 * ##### chrome
 * ##### firefox
 * ##### iexplorer
@@ -24,24 +24,44 @@
 ### How to run tests:
 #### With gradle command:
 ###### To run Cucumber tests with custom runTests task and with chosen browser, type:
- * '-Dselenide.browser=chrome runTests'
- * '-Dselenide.browser=firefox runTests'
- * '-Dselenide.browser=ie runTests'
+```
+-Dselenide.browser=chrome runTests
+``` 
+```
+-Dselenide.browser=firefox runTests
+```
+```
+-Dselenide.browser=ie runTests
+```
 
 ###### To run Cucumber tests with default browser, type:
-* 'clean test'
+```
+clean test
+```
 
 ###### To run Cucumber tests with chosen browser, type:
- * 'clean -Dselenide.browser=chrome test'
- * 'clean -Dselenide.browser=firefox test'
- * 'clean -Dselenide.browser=ie test'
+```
+clean -Dselenide.browser=chrome test
+```
+```
+clean -Dselenide.browser=firefox test
+```
+```
+clean -Dselenide.browser=ie test
+```
 
 ###### To run Cucumber tests with headless mode, type:
- * '-Dselenide.browser=chrome -Dselenide.headless=true runTests'
+```
+-Dselenide.browser=chrome -Dselenide.headless=true runTests
+```
 
 #### With IDE (JUnit):
-* run CucumberRunner class
-* or run .feature file / directory with .feature files / scenario in .feature file
+```
+run CucumberRunner class
+```
+```
+or run .feature file / directory with .feature files / scenario in .feature file
+```
 
 #### Reports
 Reports are placed in 'target' directory.
